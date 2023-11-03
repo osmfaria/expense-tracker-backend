@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: postgres-expense-test
+    image: postgres:14.4-alpine
+    restart: always
+    ports:
+      - 5435:5432
+    env_file: .env
+
+  migration:
+    build: .
+    command: >
+      bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; 
+      npx prisma migrate deploy && echo "Migrations applied ✅, Test environment 🧪 " && exit 0'
+    depends_on:
+      - db
