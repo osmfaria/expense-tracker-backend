@@ -11,7 +11,6 @@ export const validate = (schema) => async (req, res, next) => {
 
     next()
   } catch (err) {
-    console.log(err)
     next(new AppError(err.errors, err.statusCode))
   }
 }
