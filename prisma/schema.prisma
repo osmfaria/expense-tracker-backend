@@ -10,10 +10,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Employee {
-  id         String @id @default(uuid())
-  company_id Int
-  name       String
+model User {
+  id        String @id @default(uuid())
+  companyId Int
+  name      String
 
   expenses Expense[]
 }
@@ -24,6 +24,6 @@ model Expense {
   description String
   amount      Float
 
-  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
-  employeeId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 }
