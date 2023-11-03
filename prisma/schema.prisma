@@ -9,3 +9,21 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Employee {
+  id         String @id @default(uuid())
+  company_id Int
+  name       String
+
+  expenses Expense[]
+}
+
+model Expense {
+  id          String   @id @default(uuid())
+  date        DateTime
+  description String
+  amount      Float
+
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employeeId String
+}
