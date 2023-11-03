@@ -5,16 +5,18 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js",
-    "dev": "nodemon --exec sucrase-node src/app.js"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "start": "node src/server.js",
+    "dev": "nodemon --exec sucrase-node src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.0.1",
-    "sucrase": "^3.34.0"
+    "sucrase": "^3.34.0",
+    "supertest": "^6.3.3"
   },
   "dependencies": {
     "@prisma/client": "^5.5.2",
