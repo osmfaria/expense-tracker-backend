@@ -4,6 +4,7 @@ import prismaClient from '../database/prismaClient'
 
 describe('🔷 User route testing', () => {
   afterAll(async () => {
+    await prismaClient.user.deleteMany()
     await prismaClient.$disconnect()
   })
 
