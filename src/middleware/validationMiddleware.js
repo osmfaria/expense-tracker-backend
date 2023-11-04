@@ -11,6 +11,13 @@ export const validate = (schema) => async (req, res, next) => {
 
     next()
   } catch (err) {
-    next(new AppError(err.errors, err.statusCode))
+    const errors = err.inner.reduce((acc, error) => {
+      if (!acc[error.path]) {
+        acc[error.path] = error.message
+      }
+      return acc
+    }, {})
+
+    next(new AppError(errors, err.statusCode))
   }
 }
