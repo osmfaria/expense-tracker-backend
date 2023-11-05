@@ -47,8 +47,6 @@ describe('🔷 Expense route testing', () => {
       id: expenseId,
     }
 
-    console.log(expenseId)
-
     const response = await request(app).patch(`/expenses`).send(updatedExpense)
 
     expect(response.statusCode).toBe(200)
@@ -57,5 +55,19 @@ describe('🔷 Expense route testing', () => {
       updatedExpense.description
     )
     expect(response.body).toHaveProperty('amount', updatedExpense.amount)
+  })
+
+  test('Should delete expense', async () => {
+    const response = await request(app).delete(`/expenses/${expenseId}`).send()
+
+    expect(response.statusCode).toBe(204)
+
+    const expenseSerach = await prismaClient.expense.findUnique({
+      where: {
+        id: expenseId,
+      },
+    })
+
+    expect(expenseSerach).toBeNull()
   })
 })
