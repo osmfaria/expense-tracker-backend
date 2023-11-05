@@ -70,4 +70,44 @@ describe('🔷 Expense route testing', () => {
 
     expect(expenseSerach).toBeNull()
   })
+
+  test('Should list expenses', async () => {
+    const expenses = [
+      {
+        description: 'gas',
+        amount: 50.45,
+        date: new Date('2023-10-02'),
+        userId,
+      },
+      {
+        description: 'dinner with client',
+        amount: 76.4,
+        date: new Date('2023-08-08'),
+        userId,
+      },
+      {
+        description: 'Taxi to airport',
+        amount: 25.2,
+        date: new Date('2023-01-02'),
+        userId,
+      },
+    ]
+
+    await prismaClient.expense.createMany({
+      data: expenses,
+    })
+
+    const response = await request(app).get(`/expenses/${userId}/2023`).send()
+    expect(response.statusCode).toBe(200)
+    expect(Array.isArray(response.body)).toBe(true)
+
+    expenses.forEach((expense, index) => {
+      expect(response.body[index]).toHaveProperty(
+        'description',
+        expense.description
+      )
+      expect(response.body[index]).toHaveProperty('amount', expense.amount)
+      expect(new Date(response.body[index].date)).toEqual(expense.date)
+    })
+  })
 })
