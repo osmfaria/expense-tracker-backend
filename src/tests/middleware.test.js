@@ -39,8 +39,8 @@ describe('🔷 Middleware test', () => {
 
     await validate(userCreateSchema)(req, res, next)
     expect(next).toBeCalledWith(expect.any(AppError))
-    expect(next.mock.calls[0][0].message).toEqual([
-      'should be equal or higher than 1',
-    ])
+    expect(next.mock.calls[0][0].message).toEqual({
+      companyId: 'should be equal or higher than 1',
+    })
   })
 })
