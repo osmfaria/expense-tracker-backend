@@ -38,7 +38,6 @@ describe('🔷 Middleware test', () => {
     const res = mockRes()
 
     await validate(userCreateSchema)(req, res, next)
-    console.log(next.mock.calls[0][0].message)
     expect(next).toBeCalledWith(expect.any(AppError))
     expect(next.mock.calls[0][0].message).toEqual([
       'should be equal or higher than 1',
