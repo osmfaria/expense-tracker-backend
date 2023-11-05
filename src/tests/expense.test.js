@@ -4,6 +4,7 @@ import prismaClient from '../database/prismaClient'
 
 describe('🔷 Expense route testing', () => {
   let userId
+  let expenseId
   beforeAll(async () => {
     const user = {
       name: 'Test User',
@@ -35,5 +36,26 @@ describe('🔷 Expense route testing', () => {
     expect(response.body).toHaveProperty('date')
     expect(response.body.date).toContain(expense.date)
     expect(typeof response.body.id).toContain('string')
+
+    expenseId = response.body.id
+  })
+
+  test('Should update expense', async () => {
+    const updatedExpense = {
+      amount: 73,
+      description: 'Updated expense',
+      id: expenseId,
+    }
+
+    console.log(expenseId)
+
+    const response = await request(app).patch(`/expenses`).send(updatedExpense)
+
+    expect(response.statusCode).toBe(200)
+    expect(response.body).toHaveProperty(
+      'description',
+      updatedExpense.description
+    )
+    expect(response.body).toHaveProperty('amount', updatedExpense.amount)
   })
 })
