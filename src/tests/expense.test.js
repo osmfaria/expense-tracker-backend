@@ -149,6 +149,10 @@ describe('🔷 Expense route testing', () => {
       expect(response.body[index]).toHaveProperty('week')
       expect(response.body[index]).toHaveProperty('year')
     })
+
+    expect(response.body[0].week_number).toEqual('40')
+    expect(response.body[0].total_amount).toEqual(70.45)
+    expect(response.body[0].year).toEqual('2023')
   })
 
   test('Should list years that have expenses', async () => {
