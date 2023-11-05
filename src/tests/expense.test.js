@@ -150,4 +150,39 @@ describe('🔷 Expense route testing', () => {
       expect(response.body[index]).toHaveProperty('year')
     })
   })
+
+  test('Should list years that have expenses', async () => {
+    const expenses = [
+      {
+        description: 'lunch',
+        amount: 20.0,
+        date: new Date('2022-10-04'),
+        userId,
+      },
+      {
+        description: 'Taxi',
+        amount: 14.0,
+        date: new Date('2020-08-09'),
+        userId,
+      },
+      {
+        description: 'Snacks',
+        amount: 10.0,
+        date: new Date('2019-01-04'),
+        userId,
+      },
+    ]
+
+    await prismaClient.expense.createMany({
+      data: expenses,
+    })
+
+    const response = await request(app)
+      .get(`/expenses/${userId}/recorded-years`)
+      .send()
+    expect(response.statusCode).toBe(200)
+    expect(Array.isArray(response.body)).toBe(true)
+    expect(response.body[0]).toHaveProperty('year', '2023')
+    expect(response.body[0]).toHaveProperty('total_amount', 196.05)
+  })
 })
