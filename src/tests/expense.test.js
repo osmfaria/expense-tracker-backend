@@ -71,7 +71,7 @@ describe('🔷 Expense route testing', () => {
     expect(expenseSerach).toBeNull()
   })
 
-  test('Should list expenses', async () => {
+  test('Should list expenses, in order from the most recent', async () => {
     const expenses = [
       {
         description: 'gas',
@@ -108,6 +108,46 @@ describe('🔷 Expense route testing', () => {
       )
       expect(response.body[index]).toHaveProperty('amount', expense.amount)
       expect(new Date(response.body[index].date)).toEqual(expense.date)
+    })
+  })
+
+  test('Should list expenses grouped by week', async () => {
+    const expenses = [
+      {
+        description: 'lunch',
+        amount: 20.0,
+        date: new Date('2023-10-04'),
+        userId,
+      },
+      {
+        description: 'Taxi',
+        amount: 14.0,
+        date: new Date('2023-08-09'),
+        userId,
+      },
+      {
+        description: 'Snacks',
+        amount: 10.0,
+        date: new Date('2023-01-04'),
+        userId,
+      },
+    ]
+
+    await prismaClient.expense.createMany({
+      data: expenses,
+    })
+
+    const response = await request(app)
+      .get(`/expenses/week/${userId}/2023`)
+      .send()
+    expect(response.statusCode).toBe(200)
+    expect(Array.isArray(response.body)).toBe(true)
+
+    expenses.forEach((_, index) => {
+      expect(response.body[index]).toHaveProperty('week_number')
+      expect(response.body[index]).toHaveProperty('total_amount')
+      expect(response.body[index]).toHaveProperty('week')
+      expect(response.body[index]).toHaveProperty('year')
     })
   })
 })
