@@ -1,6 +1,6 @@
 import prismaClient from '../../database/prismaClient'
 
-export const listExpenseByWeekService = async (user_id, year) => {
+const listExpenseByWeekService = async (user_id, year) => {
   const expense = await prismaClient.$queryRaw`
   SELECT DATE_TRUNC('week', date) as week,
     EXTRACT(WEEK FROM date) as week_number,
@@ -19,3 +19,5 @@ export const listExpenseByWeekService = async (user_id, year) => {
 
   return expense
 }
+
+export default listExpenseByWeekService
