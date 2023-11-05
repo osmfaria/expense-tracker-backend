@@ -1,7 +1,8 @@
 import createExpenseService from '../service/expense/createExpense.service'
 import deleteExpenseService from '../service/expense/deleteExpense.service'
 import listExpenseService from '../service/expense/listExpense.service'
-import { listExpenseByWeekService } from '../service/expense/listExpenseByWeek.service'
+import listExpenseByWeekService from '../service/expense/listExpenseByWeek.service'
+import ListYearsWithExpenseService from '../service/expense/listYearsWithExpense.service'
 import updateExpenseService from '../service/expense/updateExpense.service'
 
 export const createExpenseController = async (req, res) => {
@@ -40,6 +41,14 @@ export const listExpenseByWeekController = async (req, res) => {
   const { user_id, year } = req.params
 
   const expenses = await listExpenseByWeekService(user_id, year)
+
+  return res.status(200).json(expenses)
+}
+
+export const ListYearsWithExpenseController = async (req, res) => {
+  const { user_id } = req.params
+
+  const expenses = await ListYearsWithExpenseService(user_id)
 
   return res.status(200).json(expenses)
 }
