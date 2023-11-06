@@ -44,10 +44,11 @@ describe('🔷 Expense route testing', () => {
     const updatedExpense = {
       amount: 73,
       description: 'Updated expense',
-      id: expenseId,
     }
 
-    const response = await request(app).patch(`/expenses`).send(updatedExpense)
+    const response = await request(app)
+      .patch(`/expenses/${expenseId}`)
+      .send(updatedExpense)
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toHaveProperty(
