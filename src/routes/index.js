@@ -1,7 +1,13 @@
 import expenseRoute from './expenseRoutes.js'
 import userRouter from './userRoutes.js'
 import swaggerUi from 'swagger-ui-express'
-import swaggerDocs from '../../swagger.json'
+import fs from 'fs'
+// import swaggerDocs from '../../swagger.json' assert { type: 'json' }
+
+const loadJSON = (path) =>
+  JSON.parse(fs.readFileSync(new URL(path, import.meta.url)))
+
+const swaggerDocs = loadJSON('../../swagger.json')
 
 const appRoutes = (app) => {
   app.use('/users', userRouter)

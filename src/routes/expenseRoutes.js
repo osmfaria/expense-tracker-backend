@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { validate } from '../middleware/validationMiddleware'
+import { validate } from '../middleware/validationMiddleware.js'
 import {
   expenseCreateSchema,
   expenseUpdateSchema,
-} from '../schema/expenseSchema'
+} from '../schema/expenseSchema.js'
 import {
   ListYearsWithExpenseController,
   createExpenseController,
@@ -11,7 +11,7 @@ import {
   listExpenseByWeekController,
   listExpenseController,
   updateExpenseController,
-} from '../controller/expenseControler'
+} from '../controller/expenseControler.js'
 
 const expenseRoute = Router()
 

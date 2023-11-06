@@ -1,4 +1,4 @@
-import prismaClient from '../../database/prismaClient'
+import prismaClient from '../../database/prismaClient.js'
 
 const listExpenseByWeekService = async (user_id, year) => {
   const user = await prismaClient.user.findUnique({

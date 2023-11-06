@@ -1,5 +1,5 @@
-import { AppError } from '../../../errors/appError'
-import prismaClient from '../../database/prismaClient'
+import { AppError } from '../../../errors/appError.js'
+import prismaClient from '../../database/prismaClient.js'
 
 const deleteExpenseService = async (expense_id) => {
   const expense = await prismaClient.expense.findUnique({

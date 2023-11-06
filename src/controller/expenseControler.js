@@ -1,9 +1,9 @@
-import createExpenseService from '../service/expense/createExpense.service'
-import deleteExpenseService from '../service/expense/deleteExpense.service'
-import listExpenseService from '../service/expense/listExpense.service'
-import listExpenseByWeekService from '../service/expense/listExpenseByWeek.service'
-import ListYearsWithExpenseService from '../service/expense/listYearsWithExpense.service'
-import updateExpenseService from '../service/expense/updateExpense.service'
+import createExpenseService from '../service/expense/createExpense.service.js'
+import deleteExpenseService from '../service/expense/deleteExpense.service.js'
+import listExpenseService from '../service/expense/listExpense.service.js'
+import listExpenseByWeekService from '../service/expense/listExpenseByWeek.service.js'
+import ListYearsWithExpenseService from '../service/expense/listYearsWithExpense.service.js'
+import updateExpenseService from '../service/expense/updateExpense.service.js'
 
 export const createExpenseController = async (req, res) => {
   const { userId, ...data } = req.validatedData

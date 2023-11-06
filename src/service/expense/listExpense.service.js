@@ -1,4 +1,4 @@
-import prismaClient from '../../database/prismaClient'
+import prismaClient from '../../database/prismaClient.js'
 
 const listExpenseService = async (user_id, year) => {
   const expenses = await prismaClient.expense.findMany({
