@@ -50,6 +50,7 @@
         }
       }
     },
+
     "/expenses": {
       "post": {
         "description": "Create expense",
@@ -60,7 +61,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "User object",
+            "description": "Expense object",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/Expense"
@@ -73,6 +74,36 @@
             "schema": {
               "$ref": "#/components/schemas/ResponseExpense"
             }
+          }
+        }
+      }
+    },
+    "/expenses/{expense_id}": {
+      "patch": {
+        "description": "Update expense",
+        "tags": ["Expense"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "expense_id",
+            "description": "Expense object",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UpdateExpense"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Expense updated",
+            "schema": {
+              "$ref": "#/components/schemas/ResponseExpense"
+            }
+          },
+          "404": {
+            "message": "Expense not found"
           }
         }
       }
@@ -156,6 +187,24 @@
           "userId": {
             "type": "string",
             "example": "0f04f189-a01d-4dba-9e64-cc87c2c039bd"
+          }
+        }
+      },
+      "UpdateExpense": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "description": {
+            "type": "string",
+            "example": "dinner with clients"
+          },
+          "amount": {
+            "type": "number",
+            "example": 22.25
+          },
+          "date": {
+            "type": "string",
+            "example": "2023-10-08"
           }
         }
       }
