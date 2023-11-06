@@ -14,9 +14,10 @@ export const createExpenseController = async (req, res) => {
 }
 
 export const updateExpenseController = async (req, res) => {
-  const { id, ...data } = req.validatedData
+  const { data } = req.validatedData
+  const { expense_id } = req.params
 
-  const expense = await updateExpenseService(data, id)
+  const expense = await updateExpenseService(data, expense_id)
 
   return res.status(200).json(expense)
 }
