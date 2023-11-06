@@ -136,6 +136,31 @@
           }
         }
       }
+    },
+    "/expenses/{user_id}/recorded-years": {
+      "get": {
+        "description": "List years that contain expenses from a specific user",
+        "tags": ["Expense"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "Id of the user to list expenses for",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of expenses from the user returned"
+          },
+          "404": {
+            "description": "{'message': 'User not found'}"
+          }
+        }
+      }
     }
   },
 
