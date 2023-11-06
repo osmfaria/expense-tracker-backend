@@ -1,0 +1,164 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Expense Tracker API",
+    "description": "Expense Tracker API, offering endpoints for creating, listing, updating, and deleting expenses.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "paths": {
+    "/users": {
+      "post": {
+        "description": "Create user",
+        "tags": ["User"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/components/schemas/ResponseUser"
+            }
+          },
+          "400": {
+            "description": "'message': {'companyId': 'should be equal or higher than 1'}"
+          }
+        }
+      },
+      "get": {
+        "description": "List users",
+        "tags": ["User"],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/expenses": {
+      "post": {
+        "description": "Create expense",
+        "tags": ["Expense"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Expense"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/components/schemas/ResponseExpense"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "required": ["name", "companyId"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Odin Allfather"
+          },
+          "companyId": {
+            "type": "number",
+            "example": 10
+          }
+        }
+      },
+      "ResponseUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "0f04f189-a01d-4dba-9e64-cc87c2c039bd"
+          },
+          "name": {
+            "type": "string",
+            "example": "Odin Allfather"
+          },
+          "companyId": {
+            "type": "number",
+            "example": 10
+          }
+        }
+      },
+      "Expense": {
+        "type": "object",
+        "required": ["description", "amount", "date", "userId"],
+        "properties": {
+          "description": {
+            "type": "string",
+            "example": "dinner with clients"
+          },
+          "amount": {
+            "type": "number",
+            "example": 22.25
+          },
+          "date": {
+            "type": "string",
+            "example": "2023-10-08"
+          },
+          "userId": {
+            "type": "string",
+            "example": "0f04f189-a01d-4dba-9e64-cc87c2c039bd"
+          }
+        }
+      },
+      "ResponseExpense": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "0f04f189-a01d-4dba-9e64-cc87c2c0393wc"
+          },
+          "description": {
+            "type": "string",
+            "example": "dinner with clients"
+          },
+          "amount": {
+            "type": "number",
+            "example": 22.25
+          },
+          "date": {
+            "type": "string",
+            "example": "2023-10-08T07:00:00.000Z"
+          },
+          "userId": {
+            "type": "string",
+            "example": "0f04f189-a01d-4dba-9e64-cc87c2c039bd"
+          }
+        }
+      }
+    }
+  }
+}
