@@ -18,5 +18,4 @@ export const expenseUpdateSchema = yup.object().shape({
     .number()
     .positive()
     .test((value) => (value.toString().split('.')[1] || '').length <= 2),
-  id: yup.string().required(),
 })
