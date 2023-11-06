@@ -6,8 +6,12 @@ services:
     image: postgres:14.4-alpine
     restart: always
     ports:
-      - 5435:5432
-    env_file: .env
+      - 5432:5432
+    environment:
+      - DATABASE_URL=postgresql://postgres:1234@db:5432/expenses_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=expenses_db
 
   migration:
     build: .
