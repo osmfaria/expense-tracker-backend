@@ -1,8 +1,8 @@
 import { AppError } from '../../errors/appError.js'
 
-const errorMiddleware = (error, req, res, next) => {
-  if (error instanceof AppError) {
-    return res.status(error.statusCode).json({ message: error.message })
+const errorMiddleware = (err, req, res, _) => {
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({ message: err.message })
   }
 
   return res.status(500).json({
