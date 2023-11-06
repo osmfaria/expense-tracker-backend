@@ -1,6 +1,16 @@
 import prismaClient from '../../database/prismaClient'
 
 const listExpenseByWeekService = async (user_id, year) => {
+  const user = await prismaClient.user.findUnique({
+    where: {
+      id: user_id,
+    },
+  })
+
+  if (!user) {
+    throw new AppError('User not found', 404)
+  }
+
   const expense = await prismaClient.$queryRaw`
   SELECT DATE_TRUNC('week', date) as week,
     EXTRACT(WEEK FROM date) as week_number,
