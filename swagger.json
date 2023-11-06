@@ -154,7 +154,71 @@
         ],
         "responses": {
           "200": {
-            "description": "List of expenses from the user returned"
+            "description": "List of years that contain expnses returned"
+          },
+          "404": {
+            "description": "{'message': 'User not found'}"
+          }
+        }
+      }
+    },
+    "/expenses/{user_id}/{year}": {
+      "get": {
+        "description": "List expenses from a user on the specific year",
+        "tags": ["Expense"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "Id of the user to list expenses for",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "year",
+            "description": "Year of interest",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of expenses from the user returned for the specific year"
+          },
+          "404": {
+            "description": "{'message': 'User not found'}"
+          }
+        }
+      }
+    },
+    "/expenses/week/{user_id}/{year}": {
+      "get": {
+        "description": "List total expenses per week for selected year",
+        "tags": ["Expense"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "Id of the user to list expenses for",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "year",
+            "description": "Year of interest",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of expenses by week from the user returned for the specific year"
           },
           "404": {
             "description": "{'message': 'User not found'}"
