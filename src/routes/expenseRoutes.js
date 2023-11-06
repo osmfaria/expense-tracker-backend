@@ -16,7 +16,11 @@ import {
 const expenseRoute = Router()
 
 expenseRoute.post('', validate(expenseCreateSchema), createExpenseController)
-expenseRoute.patch('', validate(expenseUpdateSchema), updateExpenseController)
+expenseRoute.patch(
+  '/:expense_id',
+  validate(expenseUpdateSchema),
+  updateExpenseController
+)
 expenseRoute.delete('/:expense_id', deleteExpenseController)
 expenseRoute.get('/:user_id/recorded-years', ListYearsWithExpenseController)
 expenseRoute.get('/:user_id/:year', listExpenseController)
