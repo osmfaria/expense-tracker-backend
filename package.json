@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --verbose --runInBand",
-    "start": "node src/server.js",
+    "start": "node --experimental-vm-modules src/server.js",
     "dev": "nodemon --exec sucrase-node src/server.js"
   },
   "keywords": [],
