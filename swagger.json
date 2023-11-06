@@ -50,7 +50,6 @@
         }
       }
     },
-
     "/expenses": {
       "post": {
         "description": "Create expense",
@@ -88,7 +87,7 @@
           {
             "in": "path",
             "name": "expense_id",
-            "description": "Expense object",
+            "description": "Id of the expense to update",
             "required": true,
             "type": "string"
           },
@@ -108,6 +107,29 @@
             "schema": {
               "$ref": "#/components/schemas/ResponseExpense"
             }
+          },
+          "404": {
+            "description": "{'message': 'Expense not found'}"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete expense",
+        "tags": ["Expense"],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "expense_id",
+            "description": "Id of the expense to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
           },
           "404": {
             "description": "{'message': 'Expense not found'}"
