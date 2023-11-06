@@ -90,6 +90,13 @@
             "name": "expense_id",
             "description": "Expense object",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Expense update object",
             "schema": {
               "$ref": "#/components/schemas/UpdateExpense"
             }
@@ -103,7 +110,7 @@
             }
           },
           "404": {
-            "message": "Expense not found"
+            "description": "{'message': 'Expense not found'}"
           }
         }
       }
@@ -192,7 +199,6 @@
       },
       "UpdateExpense": {
         "type": "object",
-        "required": [],
         "properties": {
           "description": {
             "type": "string",
