@@ -8,6 +8,7 @@ const loadJSON = (path) =>
   JSON.parse(fs.readFileSync(new URL(path, import.meta.url)))
 
 const swaggerDocs = loadJSON('../../swagger.json')
+swaggerDocs.host = process.env.API_URL || 'localhost:5000'
 
 const appRoutes = (app) => {
   app.use('/users', userRouter)
