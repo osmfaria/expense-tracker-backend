@@ -30,5 +30,5 @@ This backend for the expense tracker is developed using Express.js, with Prisma 
 
 ## 🔗 Links
 
-- App frontend [repo](https://expense-tracker-osm.vercel.app/);
-- Deployed [app](https://mshop-ecommerce.vercel.app/).
+- Frontend [repo](https://github.com/osmfaria/expense-tracker-frontend);
+- Deployed frontend [app](https://expense-tracker-osm.vercel.app/).
